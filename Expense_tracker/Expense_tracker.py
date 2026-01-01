@@ -1,19 +1,11 @@
 # Expense tracker 
-# Input of user spending 
-# areas of user spending e.g. home, leisure 
-# Amount saved over the month 
-# % amount overall of items between areas of spending
-
-
 def track_expenses():
     utilities = []
     rent = []
     groceries = []
     leisure = []
     investments = []
-
     
-
     print("Welcome to your personalised Expense tracker")   
     user_income = int(input("How much was your monthly income this month: $ ")) 
 
@@ -65,5 +57,6 @@ def track_expenses():
             break
         else:
             print("Invalid Input")
+
 
 track_expenses()
