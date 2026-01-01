@@ -24,23 +24,15 @@ If the dealer busts, the player wins. If the player has a higher total than the 
 
 Key Features:
 
-Player Interaction: The player chooses their actions (Hit, Stand, Double) during their turn.
+- Player Interaction: The player chooses their actions (Hit, Stand, Double) during their turn.
 
-Card Value Calculation: Automatically adjusts Ace values to avoid busting.
+- Card Value Calculation: Automatically adjusts Ace values to avoid busting.
 
-Dealer Behavior: The dealer automatically draws cards until reaching at least 17 points.
+- Dealer Behavior: The dealer automatically draws cards until reaching at least 17 points.
 
-Game Replay: After each round, the player has the option to play again.
+- Game Replay: After each round, the player has the option to play again.
 
 How to Play:
 
-Enter your bet at the beginning of each round.
-
-Choose to Hit, Stand, or Double based on your hand and strategy.
-
-After your turn, the dealer reveals their cards and plays according to standard rules.
-
-The winner is determined by who has the higher total without busting.
-
-Optionally, you can play again after each round.
+Enter your bet at the beginning of each round. Choose to Hit, Stand, or Double based on your hand and strategy. After your turn, the dealer reveals their cards and plays according to standard rules. The winner is determined by who has the higher total without busting. Optionally, you can play again after each round.
 
