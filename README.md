@@ -1,2 +1,2 @@
-# Small-project-collection
-Contains a conglomerate of small projects created to secure my fundamental knowledge within python
+Small-Project-Collection
+A collection of small Python projects created to reinforce and solidify fundamental programming concepts.
