@@ -4,12 +4,12 @@ A simple Python-based command-line expense tracker that helps you monitor monthl
 
 Features:
 
-Track expenses by category
+- Track expenses by category
 
-Calculate total spending and savings
+- Calculate total spending and savings
 
-Display spending distribution as percentages
+- Display spending distribution as percentages
 
-Incentivize saving: adds $100 to investments if savings exceed $300
+- Incentivize saving: adds $100 to investments if savings exceed $300
 
-Simple console-based interface
+- Simple console-based interface
