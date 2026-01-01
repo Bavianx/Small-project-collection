@@ -28,7 +28,7 @@ def create_deck():
 def main():
     print("=== BLACKJACK ===\n")
     
-    # Get bet
+    # Gets the users bet
     bet = int(input("Enter your bet: $"))
     
     # Create deck and deal
@@ -36,7 +36,7 @@ def main():
     player_hand = [deck.pop(), deck.pop()]
     dealer_hand = [deck.pop(), deck.pop()]
     
-    # Show initial hands
+    # Show initial hands of both user and dealer
     print(f"\nYour cards: {player_hand} (Total: {card_total(player_hand)})")
     print(f"Dealer shows: [{dealer_hand[0]}, ?]\n")
     
@@ -54,13 +54,13 @@ def main():
             print(f"You drew: {player_hand[-1]}")
             print(f"Your hand: {player_hand} (Total: {card_total(player_hand)})\n")
         elif choice == 'D' and len(player_hand) == 2:
-            bet *= 2  # Double the bet
+            bet *= 2  # Double the bet if user wants to double (D)
             player_hand.append(deck.pop())
             doubled = True
             print(f"DOUBLED! Bet is now ${bet}")
             print(f"You drew: {player_hand[-1]}")
             print(f"Your hand: {player_hand} (Total: {card_total(player_hand)})\n")
-            break  # Turn ends after double
+            break  # Turn ends after double (Only works on 1 hand, forces game end after)
         elif choice == 'S':
             break
     
@@ -70,7 +70,7 @@ def main():
     if player_total > 21:
         print(f"BUST! You lose ${bet}\n")
     else:
-        # Dealer turn
+        # Dealers turn
         print(f"Dealer reveals: {dealer_hand} (Total: {card_total(dealer_hand)})")
         
         while card_total(dealer_hand) < 17:
@@ -79,7 +79,6 @@ def main():
         
         dealer_total = card_total(dealer_hand)
         
-        # Determine winner
         print(f"\n=== FINAL ===")
         print(f"You: {player_total} | Dealer: {dealer_total}")
         print(f"Bet: ${bet}\n")
@@ -100,6 +99,7 @@ def main():
 
 
 main()
+
 
 
 
