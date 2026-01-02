@@ -1,52 +1,60 @@
 def atm_machine():
-
     balance = 0
 
     while True:
-        print("-------------------------------------------------------------------------")
-        print("- Welcome, how can we help you today")
+        print("\n" + "="*70)
+        print("Welcome! How can we help you today?")
         print("1 - Deposit")
         print("2 - Withdraw")
-        print("3 - Check balance")
+        print("3 - Check Balance")
         print("4 - Exit")
-        print("-------------------------------------------------------------------------")
+        print("="*70)
+        
         try:
             user = int(input("Please select your choice (1-4): "))
         except ValueError:
-            print("Invalid number. Please enter the correct one from the list!")
+            print("Invalid input. Please enter a number 1-4.")
             continue
             
         if user == 1:
             try:
-                deposit = int(input("Please input the amount you would like to deposit: $ "))
-            except ValueError:
-                print("Invalid amount. Please enter a number")
-                question = input("Are you sure you would like to follow through with this deposit? (y/n): ").lower()
+                deposit = int(input("Enter deposit amount: $"))
+                if deposit <= 0:
+                    print("Deposit must be positive!")
+                    continue
+                question = input(f"Deposit ${deposit}? (y/n): ").lower()
                 if question == 'y':
                     balance += deposit
-                    print(f"Your balance is now: $", {balance} )
+                    print(f"Deposited ${deposit}. New balance: ${balance}")
                 else:
-                    continue
+                    print("Deposit cancelled.")
+            except ValueError:
+                print("Invalid amount. Please enter a number.")
 
         elif user == 2:
-             try:
-                withdraw = int(input("Please request how much money you would like to withdraw: $ "))
-             except ValueError:
-                print("Invalid amount. Please enter a number")
-                question = input("Are you sure you would like to follow through with this withdrawl? (y/n): ").lower()
-                if question == 'y':
-                    if withdraw > balance:
-                        print("You have insufficient funds!")
-                    else:
+            try:
+                withdraw = int(input("Enter withdrawal amount: $"))
+                if withdraw <= 0:
+                    print("Withdrawal must be positive!")
+                    continue
+                if withdraw > balance:
+                    print(f"Insufficient funds! Your balance is ${balance}")
+                else:
+                    question = input(f"Withdraw ${withdraw}? (y/n): ").lower()
+                    if question == 'y':
                         balance -= withdraw
-                        print(f"You have withdrawn:", {withdraw} ,"Your balance is now: $ ", {balance})
-
+                        print(f"Withdrew ${withdraw}. New balance: ${balance}")
+                    else:
+                        print("Withdrawal cancelled.")
+            except ValueError:
+                print("Invalid amount. Please enter a number.")
         elif user == 3:
-            print(f"Your balance is: $", {balance})
-
+            print(f"Your current balance is: ${balance}")
         elif user == 4:
-            print("Thank you for using us today")
+            print(f"Thank you for banking with us! Final balance: ${balance}")
             break
+        else:
+            print("Invalid choice. Please select 1-4.")
+    return balance
 
 final_balance = atm_machine()
-print(final_balance)
