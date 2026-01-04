@@ -36,3 +36,7 @@ How to Play:
 
 Enter your bet at the beginning of each round. Choose to Hit, Stand, or Double based on your hand and strategy. After your turn, the dealer reveals their cards and plays according to standard rules. The winner is determined by who has the higher total without busting. Optionally, you can play again after each round.
 
+
+
+* Player + player vs dealer will be added at some point
+
