@@ -84,11 +84,11 @@ def main():
         print(f"Bet: ${bet}\n")
         
         if dealer_total > 21:
-            print(f"Dealer busts! YOU WIN ${bet}! 🎉")
+            print(f"Dealer busts! YOU WIN ${bet}! ")
         elif player_total > dealer_total:
-            print(f"YOU WIN ${bet}! 🎉")
+            print(f"YOU WIN ${bet}! ")
         elif player_total < dealer_total:
-            print(f"Dealer wins. You lose ${bet} 😞")
+            print(f"Dealer wins. You lose ${bet} ")
         else:
             print("PUSH (tie) - Bet returned")
     
@@ -99,6 +99,7 @@ def main():
 
 
 main()
+
 
 
 
