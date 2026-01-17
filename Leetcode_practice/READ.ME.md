@@ -9,18 +9,18 @@ The solutions are written for practice and understanding, not as final optimized
 
 
 
-Official LeetCode Problems Included:
+Official LeetCode Problems Included
 
-Two Sum (LeetCode #1)
+- Two Sum (LeetCode #1)
 
-Best Time to Buy and Sell Stock (LeetCode #121)
+- Best Time to Buy and Sell Stock (LeetCode #121)
 
-Contains Duplicate (LeetCode #217)
+- Contains Duplicate (LeetCode #217)
 
-Valid Anagram (LeetCode #242)
+- Valid Anagram (LeetCode #242)
 
-Valid Palindrome (LeetCode #125)
+- Valid Palindrome (LeetCode #125)
 
-Palindrome Number (LeetCode #9)
+- Palindrome Number (LeetCode #9)
 
-First Unique Character in a String (LeetCode #387)
+- First Unique Character in a String (LeetCode #387)
