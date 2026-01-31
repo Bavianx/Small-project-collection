@@ -13,10 +13,18 @@ A Python command-line grade management system with data persistence and comprehe
 - **Input Validation**: Comprehensive error handling prevents crashes from invalid input
 - **User-Friendly Interface**: Menu-driven navigation with clear prompts and feedback
 
-### Key Concepts
+| Function | Purpose | Validation |
+|----------|---------|------------|
+| `add_student()` | Creates new student with initial grade | Name (letters only), Subject (valid list), Grade (0-100) |
+| `add_grade()` | Adds subjects to existing students | Name, Subject, Grade validation |
+| `view_student()` | Displays individual performance with average | Name validation |
+| `show_all_students()` | Lists all students with calculated averages | None (no input) |
+| `view_all_passing()` | Groups by pass/fail (65% threshold) | None (no input) |
+| `save_to_file()` | Persists data to JSON file | File system error handling |
+| `load_from_file()` | Loads data from JSON on startup | FileNotFoundError handling |
 
-- Nested dictionaries for multi-level data organization
-- Dictionary methods (`.items()`, `.values()`) for iteration
-- Tuple lists for grouping and filtering
-- Menu-driven interface with input validation
-- Average calculations using aggregation
+
+## Future Enhancements
+- [ ] Delete students or subjects
+- [ ] Letter grade assignments (A, B, C, D, F)
+- [ ] Graphical data visualization
