@@ -1,16 +1,17 @@
 # Grade Booking System
 
-A Python-based command-line grade management system that helps teachers and administrators track student performance across multiple subjects. The system calculates averages, categorizes students by performance, and provides comprehensive reporting through an intuitive menu interface.
+A Python command-line grade management system with data persistence and comprehensive input validation. Track student performance across multiple subjects with automatic average calculations and pass/fail reporting.
 
 ## Features
 
-- **Add new students** with their first grade
-- **Track multiple subjects** per student
-- **Calculate averages** automatically for each student
-- **View individual records** with detailed grade breakdowns
-- **Generate class reports** showing all students and their performance
-- **Performance categorization**: automatically groups students as passing (≥65%) or failing (<65%)
-- **Simple console-based interface** with menu-driven navigation
+- **Student Management**: Add new students with their first grade entry
+- **Grade Tracking**: Record multiple subject grades per student
+- **Individual Records**: View detailed student information with calculated averages
+- **Class Overview**: Display all students and their performance at a glance
+- **Performance Reports**: Automatically categorize students as passing (≥65%) or failing (<65%)
+- **Data Persistence**: Save and load grade data via JSON file storage
+- **Input Validation**: Comprehensive error handling prevents crashes from invalid input
+- **User-Friendly Interface**: Menu-driven navigation with clear prompts and feedback
 
 ### Key Concepts
 
