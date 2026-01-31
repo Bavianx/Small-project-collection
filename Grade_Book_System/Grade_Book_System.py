@@ -1,6 +1,24 @@
+import json
 
 def grade_booking_system():
-    grade_book = {}
+    filename = "grades.json"
+    
+    def load_from_file(filename):           #Define load function for json
+        try:    
+            with open(filename, 'r') as f:
+                data = json.load(f)
+            print(f"Loaded data from {filename}")
+            return data
+        except FileNotFoundError:
+            print(f"No saved data found. Starting fresh!")
+            return {}
+    
+    def save_to_file(gradebook, filename):              # Define save function for json
+        with open(filename, 'w') as f:
+            json.dump(gradebook, f, indent=4) 
+        print(f"Data saved to {filename}")
+    
+    grade_book = load_from_file(filename) 
 
     def add_student(grade_book, student, subject, grade):           #Add new student with their first grade.
 
@@ -62,7 +80,8 @@ def grade_booking_system():
         for student, average in failing:
             print(f"  {student}: {average:.2f}")
 
-    while True:                                              
+    while True:             
+        print("=====================================================")                                 
         print("Welcome to the grade booking system")
         print("1. Add student")
         print("2. Add additional grades")
@@ -70,27 +89,83 @@ def grade_booking_system():
         print("4. View all students")
         print("5. View all passing")
         print("6. Exit....")
-
-        choice = int(input("Please input correlating number of where you would like to go: "))
+        print("=====================================================")
+        try:
+            choice = int(input("Please input correlating number of where you would like to go: "))
+        except ValueError:
+            print("Please input the correlating number")
+            print("=====================================================")
+            continue 
 
         if choice == 1:
             student = input("Students name: ")
+            if not student.strip():
+                print("Name cannot be empty!")
+                print("=====================================================")
+                continue
+            if not all(character.isalpha() or character.isspace() for character in student):
+                print("Name should only contain letters!")
+                print("=====================================================")
+                continue 
             subject = input("Subject: ")
-            grade = int(input("Grade: "))
+            valid_subjects = ["math", "english", "science", "history", "geography", "art"]
+            if subject.lower() not in valid_subjects:
+                print(f"Subjects must be one of: {', '.join(valid_subjects)}")
+                print("=====================================================")
+                continue
+            try:
+                grade = int(input("Grade: "))
+                if grade < 0 or grade > 100:
+                    print("Please input a valid grade between 0-100")
+                    print("=====================================================")
+                    continue
+            except ValueError:
+                print("Grade must be a number!")
+                print("=====================================================")
+                continue
             add_student(grade_book, student, subject, grade)
         elif choice == 2:
             student = input("Student name: ")
+            if not student.strip():
+                print("Name cannot be empty!")
+                print("=====================================================")
+                continue
+            if not all(c.isalpha() or c.isspace() for c in student):
+                print("Name should only contain letters!")
+                continue 
             subject = input("Subject: ")
-            grade = int(input("Grade: "))
+            if not subject.strip():
+                print("Subject cannot be empty!")
+                print("=====================================================")
+                continue
+            try:
+                grade = int(input("Grade: "))
+                if not 0 <= grade <= 100:
+                    print("Grade must be between 0-100!")
+                    print("=====================================================")
+                    continue
+            except ValueError:
+                print("Grade must be a number!")
+                print("=====================================================")
+                continue
             add_grade(grade_book, student, subject, grade)
         elif choice == 3:
             student = input("Student name: ")
+            if not student.strip():
+                print("Name cannot be empty!")
+                print("=====================================================")
+                continue
+            if not all(c.isalpha() or c.isspace() for c in student):
+                print("Name should only contain letters!")
+                print("=====================================================")
+                continue 
             view_student(grade_book, student)
         elif choice == 4:
             show_all_students(grade_book)
         elif choice == 5:
             view_all_passing(grade_book)
         elif choice == 6:
+            save_to_file(grade_book, filename)
             print("Goodbye!")
             break
         else:
