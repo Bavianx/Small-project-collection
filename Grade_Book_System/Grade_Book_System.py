@@ -7,6 +7,9 @@ def grade_booking_system():
         try:    
             with open(filename, 'r') as f:
                 data = json.load(f)
+
+            with open(filename + ".backup", 'w') as f:
+                json.dump(data, f, indent=4)
             print(f"Loaded data from {filename}")
             return data
         except FileNotFoundError:
@@ -26,6 +29,7 @@ def grade_booking_system():
             grade_book[student] = {}
         grade_book[student][subject] = grade
         print(f"Sucessfully added {student}'s {subject} grade of {grade}")
+        save_to_file(grade_book, filename)
         print(grade_book)
 
     def add_grade(grade_book, student, subject, grade):             #Add additional grade to existing student
@@ -165,10 +169,14 @@ def grade_booking_system():
         elif choice == 5:
             view_all_passing(grade_book)
         elif choice == 6:
-            save_to_file(grade_book, filename)
-            print("Goodbye!")
-            break
-        else:
-            print("Invalid choice!")
+            confirm = input("Save & Exit? (y/n): ")
+            if confirm.lower() == 'y':
+                save_to_file(grade_book, filename)
+                print("Goodbye!")
+                break
+            else:
+                print("Continuing..")
 
 grade_booking_system()
+
+
