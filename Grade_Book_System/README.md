@@ -12,6 +12,10 @@ A Python command-line grade management system with data persistence and comprehe
 - **Data Persistence**: Save and load grade data via JSON file storage
 - **Input Validation**: Comprehensive error handling prevents crashes from invalid input
 - **User-Friendly Interface**: Menu-driven navigation with clear prompts and feedback
+- JSON file storage for permanent data retention
+- Automatic load on startup
+- Manual save on exit
+- Graceful handling of missing files (first run)
 
 | Function | Purpose | Validation |
 |----------|---------|------------|
@@ -28,3 +32,5 @@ A Python command-line grade management system with data persistence and comprehe
 - [ ] Delete students or subjects
 - [ ] Letter grade assignments (A, B, C, D, F)
 - [ ] Graphical data visualization
+- [ ] Comprehensive error handling (corrupted JSON, permissions, disk full)
+- [ ] Automatic backup system
