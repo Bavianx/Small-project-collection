@@ -17,7 +17,7 @@ def grade_booking_system():
         except json.JSONDecodeError:
             print(f"Corruption of your {filename} file")
             backup = filename + ".corrupted"
-            print(f"Saving corrupted file as {backup}") #takes data corrupted data and stores it as backup 
+            print(f"Saving corrupted file as {backup}") #takes corrupted data and stores it as backup 
             try:
                 os.rename(filename, backup)     #backup created 
             except:
@@ -219,6 +219,7 @@ def grade_booking_system():
                 print("Continuing..")
 
 grade_booking_system()
+
 
 
 
