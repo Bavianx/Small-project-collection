@@ -1,5 +1,4 @@
-import json
-
+import json , os
 def grade_booking_system():
     filename = "grades.json"
     
@@ -15,11 +14,53 @@ def grade_booking_system():
         except FileNotFoundError:
             print(f"No saved data found. Starting fresh!")
             return {}
+        except json.JSONDecodeError:
+            print(f"Corruption of your {filename} file")
+            backup = filename + ".corrupted"
+            print(f"Saving corrupted file as {backup}") #takes data corrupted data and stores it as backup 
+            try:
+                os.rename(filename, backup)     #backup created 
+            except:
+                pass                             #If it already exists just continue
+            print("Starting with empty grade book.")
+            return {}                  #creates new file to add data to
+        except PermissionError:
+            print(f"ERROR: Don't have permission to read {filename}!")
+            print("Try running as administrator or check file permissions.")
+            print("Starting with empty grade book.")
+            return {}  # Start fresh with a new file, can't access old data
+        except Exception as e:
+            print(f"ERROR: Unexpected error loading {filename}")
+            print(f"Details: {e}")
+            print("Starting with empty grade book.")
+            return {}
+
     
     def save_to_file(gradebook, filename):              # Define save function for json
-        with open(filename, 'w') as f:
-            json.dump(gradebook, f, indent=4) 
-        print(f"Data saved to {filename}")
+        try:
+            with open(filename, 'w') as f:
+                json.dump(gradebook, f, indent=4) 
+            print(f"Data saved to {filename}")
+            return True
+        
+        except PermissionError:
+            print(f"ERROR: Can't save to {filename} - permission denied!")
+            print("Your data is NOT saved!")
+            return False  
+        
+        except OSError as e:
+            if "No space left" in str(e):
+                print("ERROR: Disk is full!")
+                print("  Free up space and try saving again.")
+            else:
+                print(f"ERROR: System error: {e}")
+            print("  Your data is NOT saved!")
+            return False
+        except Exception as e:
+            print(f"ERROR: Unexpected error saving: {e}")
+            print("  Your data is NOT saved!")
+            return False
+    
     
     grade_book = load_from_file(filename) 
 
@@ -102,7 +143,7 @@ def grade_booking_system():
             continue 
 
         if choice == 1:
-            student = input("Students name: ")
+            student = input("Students name: ").lower()
             if not student.strip():
                 print("Name cannot be empty!")
                 print("=====================================================")
@@ -129,7 +170,7 @@ def grade_booking_system():
                 continue
             add_student(grade_book, student, subject, grade)
         elif choice == 2:
-            student = input("Student name: ")
+            student = input("Student name: ").lower()
             if not student.strip():
                 print("Name cannot be empty!")
                 print("=====================================================")
@@ -154,7 +195,7 @@ def grade_booking_system():
                 continue
             add_grade(grade_book, student, subject, grade)
         elif choice == 3:
-            student = input("Student name: ")
+            student = input("Student name: ").lower()
             if not student.strip():
                 print("Name cannot be empty!")
                 print("=====================================================")
@@ -178,5 +219,6 @@ def grade_booking_system():
                 print("Continuing..")
 
 grade_booking_system()
+
 
 
