@@ -11,24 +11,29 @@ def grade_booking_system():
                 json.dump(data, f, indent=4)
             print(f"Loaded data from {filename}")
             return data
+        
         except FileNotFoundError:
             print(f"No saved data found. Starting fresh!")
             return {}
+        
         except json.JSONDecodeError:
             print(f"Corruption of your {filename} file")
             backup = filename + ".corrupted"
-            print(f"Saving corrupted file as {backup}") #takes corrupted data and stores it as backup 
+            print(f"Saving corrupted file as {backup}") #takes data corrupted data and stores it as backup 
+
             try:
                 os.rename(filename, backup)     #backup created 
             except:
                 pass                             #If it already exists just continue
             print("Starting with empty grade book.")
             return {}                  #creates new file to add data to
+        
         except PermissionError:
             print(f"ERROR: Don't have permission to read {filename}!")
             print("Try running as administrator or check file permissions.")
             print("Starting with empty grade book.")
             return {}  # Start fresh with a new file, can't access old data
+        
         except Exception as e:
             print(f"ERROR: Unexpected error loading {filename}")
             print(f"Details: {e}")
@@ -56,6 +61,7 @@ def grade_booking_system():
                 print(f"ERROR: System error: {e}")
             print("  Your data is NOT saved!")
             return False
+        
         except Exception as e:
             print(f"ERROR: Unexpected error saving: {e}")
             print("  Your data is NOT saved!")
@@ -148,10 +154,12 @@ def grade_booking_system():
                 print("Name cannot be empty!")
                 print("=====================================================")
                 continue
+
             if not all(character.isalpha() or character.isspace() for character in student):
                 print("Name should only contain letters!")
                 print("=====================================================")
                 continue 
+
             subject = input("Subject: ")
             valid_subjects = ["math", "english", "science", "history", "geography", "art"]
             if subject.lower() not in valid_subjects:
@@ -164,51 +172,62 @@ def grade_booking_system():
                     print("Please input a valid grade between 0-100")
                     print("=====================================================")
                     continue
+
             except ValueError:
                 print("Grade must be a number!")
                 print("=====================================================")
                 continue
             add_student(grade_book, student, subject, grade)
+
         elif choice == 2:
             student = input("Student name: ").lower()
             if not student.strip():
                 print("Name cannot be empty!")
                 print("=====================================================")
                 continue
+
             if not all(c.isalpha() or c.isspace() for c in student):
                 print("Name should only contain letters!")
                 continue 
+
             subject = input("Subject: ")
             if not subject.strip():
                 print("Subject cannot be empty!")
                 print("=====================================================")
                 continue
+
             try:
                 grade = int(input("Grade: "))
                 if not 0 <= grade <= 100:
                     print("Grade must be between 0-100!")
                     print("=====================================================")
                     continue
+
             except ValueError:
                 print("Grade must be a number!")
                 print("=====================================================")
                 continue
             add_grade(grade_book, student, subject, grade)
+
         elif choice == 3:
             student = input("Student name: ").lower()
             if not student.strip():
                 print("Name cannot be empty!")
                 print("=====================================================")
                 continue
+
             if not all(c.isalpha() or c.isspace() for c in student):
                 print("Name should only contain letters!")
                 print("=====================================================")
                 continue 
             view_student(grade_book, student)
+
         elif choice == 4:
             show_all_students(grade_book)
+
         elif choice == 5:
             view_all_passing(grade_book)
+
         elif choice == 6:
             confirm = input("Save & Exit? (y/n): ")
             if confirm.lower() == 'y':
@@ -219,6 +238,8 @@ def grade_booking_system():
                 print("Continuing..")
 
 grade_booking_system()
+
+
 
 
 
