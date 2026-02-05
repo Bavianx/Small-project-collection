@@ -2,7 +2,7 @@ import json , os
 def grade_booking_system():
     filename = "grades.json"
     
-    def load_from_file(filename):           #Define load function for json
+    def load_from_file(filename):                           #Define load function for json
         try:    
             with open(filename, 'r') as f:
                 data = json.load(f)
@@ -19,14 +19,14 @@ def grade_booking_system():
         except json.JSONDecodeError:
             print(f"Corruption of your {filename} file")
             backup = filename + ".corrupted"
-            print(f"Saving corrupted file as {backup}") #takes data corrupted data and stores it as backup 
+            print(f"Saving corrupted file as {backup}")     #takes data corrupted data and stores it as backup 
 
             try:
-                os.rename(filename, backup)     #backup created 
+                os.rename(filename, backup)                 #backup created 
             except:
-                pass                             #If it already exists just continue
+                pass                                        #If it already exists just continue
             print("Starting with empty grade book.")
-            return {}                  #creates new file to add data to
+            return {}                                       #creates new file to add data to
         
         except PermissionError:
             print(f"ERROR: Don't have permission to read {filename}!")
@@ -63,6 +63,19 @@ def grade_booking_system():
     
     grade_book = load_from_file(filename) 
 
+    def get_letter_grade(average):                                  #function which can be called to provide the grade based on the students average 
+
+        if average >= 90:
+            return "A"
+        elif average >= 80:
+            return "B"
+        elif average >= 70:
+            return "C"
+        elif average >= 60:
+            return "D"
+        else:
+            return "F"
+
     def add_student(grade_book, student, subject, grade):           #Add new student with their first grade.
 
         if student not in grade_book:
@@ -79,7 +92,7 @@ def grade_booking_system():
         else:
             print(f"Please enter a students name who is already enlisted or add student within (option 1).")
 
-    def view_student(grade_book, student):                  #Display individual student's grades and average.
+    def view_student(grade_book, student):                          #Display individual student's grades and average.
         if student in grade_book:
             print(f"{student}'s grade")
             for subject, grade in grade_book[student].items():
@@ -87,22 +100,35 @@ def grade_booking_system():
 
             student_grade = grade_book[student].values()
             average = sum(student_grade) / len(student_grade)
-            print(f"average: {average:.2f}")
-
+            letter = get_letter_grade(average)
+            
+            print(f"Average: {average:.2f} ({letter})")
         else:
             print(f"Student {student} not found")
 
-    def show_all_students(grade_book):                      #Display all students with their averages.
+    def show_all_students(grade_book):                              #Display all students with their averages.
+        group_grades = {}
         if not grade_book:
             print("No students added yet!")
             return
-        
-        print("\nAll Students:")
+
         for student, grades in grade_book.items():
             average = sum(grades.values()) / len(grades.values()) 
-            print(f"{student}: {average:.2f}")
+            letter = get_letter_grade(average)
+            if letter not in group_grades:
+                group_grades[letter] = []
+            group_grades[letter].append((student, average))
 
-    def view_all_passing(grade_book):           #Show students grouped by passing (≥65) vs failing (<65).
+        print("\nAll Students(Grade Group):")
+        for letter in ["A", "B", "C", "D", "F"]:
+            if letter in group_grades:
+                students_formatted = []
+                for student, average in group_grades[letter]:
+                    students_formatted.append(f"{student} ({average:.2f})")
+                students =", ".join(students_formatted)
+                print(f"{letter} Grade: {students} ")
+
+    def view_all_passing(grade_book):                               #Show students grouped by passing (≥65) vs failing (<65).
         if not grade_book:
             print("Please add a student")
         
@@ -123,15 +149,15 @@ def grade_booking_system():
         print("\nFAILING:")
         for student, average in failing:
             print(f"  {student}: {average:.2f}")
-            
-    def remove_student(grade_book, student):        #Student is removed from the gradebook
+
+    def remove_student(grade_book, student):
         if student in grade_book:
             grade_book.pop(student)
             print(f"Removed {student} from the grade book")
-            save_to_file(grade_book, student)
+            save_to_file(grade_book, filename)
         else:
             print(f"{student} not found!")
-            
+
     while True:             
         print("=====================================================")                                 
         print("Welcome to the grade booking system")
@@ -252,6 +278,8 @@ def grade_booking_system():
                 print("Continuing..")
 
 grade_booking_system()
+
+
 
 
 
