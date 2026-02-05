@@ -41,32 +41,25 @@ def grade_booking_system():
             return {}
 
     
-    def save_to_file(gradebook, filename):              # Define save function for json
+    def save_to_file(gradebook, filename):
         try:
-            with open(filename, 'w') as f:
-                json.dump(gradebook, f, indent=4) 
+            
+            if os.path.exists(filename):                            # Create backup of existing file BEFORE overwriting
+                with open(filename, 'r') as f:
+                    old_data = f.read()
+                with open(filename + ".backup", 'w') as f:
+                    f.write(old_data)
+            
+            with open(filename, 'w') as f:                          # Now save new data
+                json.dump(gradebook, f, indent=4)
+            
             print(f"Data saved to {filename}")
             return True
-        
-        except PermissionError:
-            print(f"ERROR: Can't save to {filename} - permission denied!")
-            print("Your data is NOT saved!")
-            return False  
-        
-        except OSError as e:
-            if "No space left" in str(e):
-                print("ERROR: Disk is full!")
-                print("  Free up space and try saving again.")
-            else:
-                print(f"ERROR: System error: {e}")
-            print("  Your data is NOT saved!")
-            return False
-        
+            
         except Exception as e:
-            print(f"ERROR: Unexpected error saving: {e}")
-            print("  Your data is NOT saved!")
+            print(f"Save failed: {e}")
             return False
-    
+        
     
     grade_book = load_from_file(filename) 
 
@@ -238,6 +231,7 @@ def grade_booking_system():
                 print("Continuing..")
 
 grade_booking_system()
+
 
 
 
