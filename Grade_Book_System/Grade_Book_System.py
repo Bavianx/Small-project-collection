@@ -123,7 +123,15 @@ def grade_booking_system():
         print("\nFAILING:")
         for student, average in failing:
             print(f"  {student}: {average:.2f}")
-
+            
+    def remove_student(grade_book, student):        #Student is removed from the gradebook
+        if student in grade_book:
+            grade_book.pop(student)
+            print(f"Removed {student} from the grade book")
+            save_to_file(grade_book, student)
+        else:
+            print(f"{student} not found!")
+            
     while True:             
         print("=====================================================")                                 
         print("Welcome to the grade booking system")
@@ -132,7 +140,8 @@ def grade_booking_system():
         print("3. View student")
         print("4. View all students")
         print("5. View all passing")
-        print("6. Exit....")
+        print("6. Delete/ remove student")
+        print("7. Exit....")
         print("=====================================================")
         try:
             choice = int(input("Please input correlating number of where you would like to go: "))
@@ -222,6 +231,18 @@ def grade_booking_system():
             view_all_passing(grade_book)
 
         elif choice == 6:
+            student = input("Student name: ").lower()
+            if not student.strip():
+                print("Name cannot be empty!")
+                print("=====================================================")
+                continue
+            confirm = input(f"Remove {student}? Once done cannot be undone (y/n)")
+            if confirm == "y":
+                remove_student(grade_book, student)
+            else:
+                print("Cancelled")
+
+        elif choice == 7:
             confirm = input("Save & Exit? (y/n): ")
             if confirm.lower() == 'y':
                 save_to_file(grade_book, filename)
@@ -231,6 +252,7 @@ def grade_booking_system():
                 print("Continuing..")
 
 grade_booking_system()
+
 
 
 
