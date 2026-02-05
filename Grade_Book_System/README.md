@@ -9,11 +9,13 @@ A Python command-line grade management system with data persistence and comprehe
 - **Individual Records**: View detailed student information with calculated averages
 - **Class Overview**: Display all students and their performance at a glance
 - **Performance Reports**: Automatically categorize students as passing (≥65%) or failing (<65%)
+- **Student Removal**: Students can be removed through inputting their name.
 - **Data Persistence**: Save and load grade data via JSON file storage
 - **Input Validation**: Comprehensive error handling prevents crashes from invalid input
 - **User-Friendly Interface**: Menu-driven navigation with clear prompts and feedback
 - JSON file storage for permanent data retention
-- Automatic load on startup
+- Automatic backup load on startup
+- 
 - Manual save on exit
 - Graceful handling of missing files (first run)
 
