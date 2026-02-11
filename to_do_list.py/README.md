@@ -1,7 +1,7 @@
-To-Do List Manager
+# To-Do List Manager
 A command-line task management application built in Python. Keep track of your tasks, mark them as complete, and never lose your progress with automatic data persistence.
 
-Features
+# Features
 
 - Add tasks to your to-do list with duplicate detection
 
@@ -22,7 +22,7 @@ Features
 - User-friendly prompts - clear feedback for all actions
 
 
-Technologies Used
+# Technologies Used
 
 Python 3
 json - data persistence and storage
@@ -30,7 +30,7 @@ os - file system operations and backup management
 
 
 
-Future Enhancements
+# Future Enhancements
 Potential features for future versions:
 
 - [] Task priorities (High, Medium, Low)
