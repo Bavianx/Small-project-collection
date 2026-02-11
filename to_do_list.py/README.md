@@ -33,7 +33,7 @@ os - file system operations and backup management
 # Future Enhancements
 Potential features for future versions:
 
-- [] Task priorities (High, Medium, Low)
-- [] Due dates and reminders
-- [] Export to CSV/Excel
-- [] Task statistics and completion rates
+- [ ] Task priorities (High, Medium, Low)
+- [ ] Due dates and reminders
+- [ ] Export to CSV/Excel
+- [ ] Task statistics and completion rates
