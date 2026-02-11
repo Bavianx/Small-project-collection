@@ -4,13 +4,21 @@ A command-line task management application built in Python. Keep track of your t
 Features
 
 Add tasks to your to-do list with duplicate detection
+
 View all tasks with completion status indicators
+
 Mark tasks as complete with visual confirmation
+
 Delete tasks when no longer needed
+
 Persistent storage - tasks save to JSON file between sessions
+
 Automatic backup system - creates backups before every save
+
 Data corruption recovery - safely handles damaged files
+
 Input validation - prevents invalid task numbers and empty entries
+
 User-friendly prompts - clear feedback for all actions
 
 
