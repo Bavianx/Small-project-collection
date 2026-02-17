@@ -15,7 +15,7 @@ A Python command-line worker contact management system with data persistence and
 - Manual Save on Exit: User prompted to save before closing
 
 | Function | Purpose / Validation |
-|----------|---------|------------|
+|----------|-------------|
 | `add_user()` |Creates new worker entry in catalogue	Name (letters only), Email, Mobile, Role (no empty fields) |
 | `edit_user()` | Updates individual fields for existing worker	Name existence check, confirmation prompt per change |
 | `remove_user()` | Permanently removes worker from catalogue	Name existence check, confirmation prompt |
