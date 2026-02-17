@@ -1,7 +1,7 @@
-#Contact Catalogue 
+# Contact Catalogue 
 A command-line contact management system built in Python that stores worker information with full data persistence.
 
-#Features
+# Features
 
 - Add Workers – Store worker name, email, mobile and job role
 - Edit Workers – Update any field with confirmation prompts
