@@ -3,19 +3,28 @@ A Python command-line library management system with book tracking, check-out/re
 
 # Features
 
-Add Books: Register new books with ISBN, title, and author
-View All Books: Display complete catalogue with availability status
-Search Books: Find books by ISBN, title, or author
-Check Out Books: Mark books as unavailable when borrowed
-Return Books: Mark books as available when returned
-Availability Tracking: Real-time status updates (Available/Checked Out)
-Data Persistence: Save and load library data via JSON file storage
-Input Validation: Prevents invalid operations (can't check out unavailable books)
-User-Friendly Interface: Menu-driven navigation with confirmation prompts
-Automatic Backup System: Creates .backup files on every load and save
-Graceful Error Handling: Handles missing files, corrupted JSON and permission errors
+- Add Books: Register new books with ISBN, title, and author
 
-FunctionPurposeValidation
+- View All Books: Display complete catalogue with availability status
+
+- Search Books: Find books by ISBN, title, or author
+
+- Check Out Books: Mark books as unavailable when borrowed
+
+- Return Books: Mark books as available when returned
+
+- Availability Tracking: Real-time status updates (Available/Checked Out)
+
+- Data Persistence: Save and load library data via JSON file storage
+
+- Input Validation: Prevents invalid operations (can't check out unavailable books)
+
+- User-Friendly Interface: Menu-driven navigation with confirmation prompts
+
+- Automatic Backup System: Creates .backup files on every load and save
+
+- Graceful Error Handling: Handles missing files, corrupted JSON and permission errors
+
 | Function | Purpose / Validation |
 |----------|-------------|
 | `add_book()` |Creates new book entry in catalogue. ISBN uniqueness check, all fields required (no empty fields) |
