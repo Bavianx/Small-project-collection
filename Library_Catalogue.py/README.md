@@ -24,7 +24,7 @@ A Python command-line library management system with book tracking, check-out/re
 - Automatic Backup System: Creates .backup files on every load and save
 
 - Graceful Error Handling: Handles missing files, corrupted JSON and permission errors
-
+# Function  Purpose  Validation
 | Function | Purpose / Validation |
 |----------|-------------|
 | `add_book()` |Creates new book entry in catalogue. ISBN uniqueness check, all fields required (no empty fields) |
