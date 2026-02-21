@@ -86,17 +86,6 @@ def expense_tracker_v2():
             for expense in expense_list:  
                 print(f" £{expense['amount']} - {expense['description']} ({expense['date']})")
 
-
-
-    def view_all_expenses(expenses):
-        if not expenses:
-            print("Please add some expenses to your expense tracker!")
-            return 
-        
-        for category, expense_list in expenses.items():
-            for expense in expense_list:
-                print(f"{category}, {amount}, {description}, {date}")
-
     def Total_spending(expenses):
         if not expenses:
             print("No expenses!")
@@ -217,6 +206,7 @@ expense_tracker_v2()
 
 
     
+
 
 
 
