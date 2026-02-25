@@ -145,4 +145,22 @@ def first_unique(text):
     for char in text:
         if seen[char] == 1:
             return char
-#-------------------------------------------------------------------------------------     
+
+#-------------------------------------------------------------------------------------  
+def first_unique_char(s):
+    seen= {}
+
+    for i, char in enumerate(s): 
+        if char in seen:                                                 
+            seen[char] += 1                                     
+        else:
+            seen[char] = 1             
+
+    for i, char in enumerate(s):              
+        if seen[char] == 1:
+            return i  
+
+print(first_unique_char("leetcode"))  # 0
+print(first_unique_char("loveleetcode"))  # 2
+print(first_unique_char("aabb"))  # -1
+#-------------------------------------------------------------------------------------  
