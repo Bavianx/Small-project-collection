@@ -1,5 +1,24 @@
  #                                                                      LEETCODE PRACTICE 
 
+def majority_element(nums):
+    count = {}
+
+    for num in nums:
+        if num in count:
+            count[num] += 1
+        else:
+            count[num] = 1      #Counts each number and provides amount to number value
+
+    majority_ceiling = len(nums) / 2       #Finds the max amount of numbers within the array (ceiling)
+
+    for num, freq in count.items():         #For loop  finds the frequency of each number within count through the use of .items()
+        if freq > majority_ceiling:
+            return num
+
+    
+print(majority_element([3, 2, 3]))              # 3
+print(majority_element([2, 2, 1, 1, 1, 2, 2]))  # 2
+
 
 nums = [2,7,11,15]
 target = 9
@@ -164,3 +183,4 @@ print(first_unique_char("leetcode"))  # 0
 print(first_unique_char("loveleetcode"))  # 2
 print(first_unique_char("aabb"))  # -1
 #-------------------------------------------------------------------------------------  
+
