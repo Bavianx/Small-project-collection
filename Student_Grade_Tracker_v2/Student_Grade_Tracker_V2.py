@@ -1,4 +1,4 @@
-
+import json, os
 class Student:
 
     def __init__(self, name):
@@ -31,7 +31,9 @@ class Student:
         print(f"Status: {status}")
 
 def main():
-    students = []
+    filename = "students.json"
+
+    students = load_from_file(filename)
 
     while True:
         print("\n" + "="*40)
@@ -53,17 +55,61 @@ def main():
             print("============================================")
 
         if choice == "1": 
-            name = input("Please input the students name: ")
-            if not name:
-                print("student could not be empty")
+            name = input("Please input the students name: ").lower()
+            if not name.strip():
+                print("Name cannot be empty!")
+                print("=====================================================")
+                continue
+
+            if not all(character.isalpha() or character.isspace() for character in name):
+                print("Name should only contain letters!")
+                print("=====================================================")
                 continue 
+
+            if not name:
+                print("Student is not within the system!")
+                continue 
+
             student = Student(name)
             students.append(student)
-        elif choice == "2": #Finish tomorrow
-            pass
-            print(f"Successfully added {name}")
+        elif choice == "2":
+            if not students:
+                print("No students in system!")
+                continue
+            
+            name = input("Please input the student's name: ").strip().lower()
+        
+            if not name:
+                print("Name cannot be empty!")
+                continue
+            
+            if not all(char.isalpha() or char.isspace() for char in name):
+                print("Name should only contain letters!")
+                continue
+            
+            found_student = None
+            for student in students:
+                if student.name.lower() == name:
+                    found_student = student
+                    break
+            
+            if found_student:
+                print(f"\n{found_student.name}'s current grades: {found_student.grades}")
+                grade = input("Enter grade to add: ").strip()
+                try:
+                    grade = float(grade)
+                    if 0 <= grade <= 100:
+                        found_student.add_grade(grade)
+                        print(f"Grade {grade} added to {found_student.name}")
+                    else:
+                        print("Grade must be between 0-100!")
+                except ValueError:
+                    print("Invalid grade! Please enter a number.")
+            else:
+                print(f"Student '{name}' not found in system!")
+
         elif choice == "3":
-            name = input("Please input the students name: ")
+            name = input("Please input the students name: ").lower()
 
             found = False
             for student in students:
@@ -76,15 +122,96 @@ def main():
                 continue
         elif choice == "4":            
             for student in students:
-                print(f"- {student.name}")
+                print(f"Student: {student.name} Grades: {student.grades} Average: {student.get_average()}")
             pass
-        elif choice == "5":#Finish tomorrow
-            pass
-        elif choice == "6":#Finish tomorrow
-            pass
-        elif choice == "7":#Finish tomorrow
-            break
+        elif choice == "5":
+            if not students:
+                print("No students within our system!")
+                continue
+            name = input("Please enter the students name: ").lower()
+
+            if not name:
+                print("Name cannot be empty!")
+                continue
+
+            found_student = None
+            for student in students:
+                if student.name == name:
+                    found_student = student
+                    break
+
+            if found_student:
+                found_student.display()
+                confirm = input("Would you still like to remove the student? (y/n): ")
+                if confirm == "y":
+                    students.remove(found_student)
+                    print(f"Successfully removed {student.name} from the system")
+                else:
+                    print("Cancelled...")
+            else:
+                print("Student was not found within our system.")
+
+        elif choice == "6":
+            if not students:
+                print("No students in system!")
+                continue
+            
+            total = 0
+            count = 0
+            
+            for student in students: 
+                avg = student.get_average()  
+                if avg > 0:  
+                    total += avg
+                    count += 1
+            
+            if count > 0:
+                class_avg = total / count
+                print(f"Class Average: {class_avg:.1f}")
+                print(f"Students with grades: {count}/{len(students)}")
+            else:
+                print("No students have grades yet!")
+        elif choice == "7":
+            confirm = input("Would you like to exit the application? (y/n):")
+            if confirm == "y":
+                save_to_file(students, filename)
+                print("Exiting...")
+                break
+            else:
+                print("Continuing!")
+
+    def save_to_file(students, filename):
+        data = {}
+        for student in students:
+            data[student.name] = student.grades
+        
+        with open(filename, "w") as f:
+            json.dump(data, f, indent=4)
+        
+        print(f"Data saved to {filename}")
+
+    def load_from_file(filename):
+        try:
+            with open(filename, "r") as f:
+                data = json.load(f)
+            
+            students = []
+            for name, grades in data.items():
+                student = Student(name)
+                student.grades = grades
+                students.append(student)
+            
+            print(f"Loaded {len(students)} students from {filename}")
+            return students
+        
+        except FileNotFoundError:
+            print("No saved data found. Starting fresh!")
+            return []
 main()
+
+
+
+
 
 
 
