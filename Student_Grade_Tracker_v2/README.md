@@ -1,5 +1,5 @@
 # Student Grade Tracker V2
-Transition from procedural programming to Object-Oriented Programming (OOP) by building a student grade tracking system. This project demonstrates how classes and objects streamline code organization and prepare for industry-standard development practices.
+Transition from procedural programming to Object-Oriented Programming (OOP) by building upon a previous project providing visual comparisons between how Classes and Objects are leveraged within a student grade tracking system. This project demonstrates how the topic area improves readability and streamlines code for organisational use and prepare for industry-standard development practices.
 
 
 ### Program Structure
