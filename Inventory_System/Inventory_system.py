@@ -65,7 +65,6 @@ def load_from_file(filename):
     try:
         with open(filename, "r") as f:
             data = json.load(f)
-        Inventory = load_from_file(filename)
         
         Inventory = {}
         for product_id, product_data in data.items():
@@ -162,4 +161,5 @@ def main():
                 print("Continuing...")
 
 main()
+
 
