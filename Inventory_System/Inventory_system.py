@@ -102,7 +102,7 @@ def main():
         print("7.) Exit...")
         print("="*15)
         try: 
-            choice = int(input("Please input a corresponding integer (1-6): "))
+            choice = int(input("Please input a corresponding integer (1-7): "))
         except ValueError:
             print("Please enter a valid integer from the list")
             continue
@@ -161,5 +161,6 @@ def main():
                 print("Continuing...")
 
 main()
+
 
 
