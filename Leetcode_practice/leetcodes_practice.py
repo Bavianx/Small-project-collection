@@ -1,4 +1,103 @@
  #                                                                      LEETCODE PRACTICE 
+
+def MoveZeros(nums):
+    write = 0
+
+    for read in range(len(nums)):
+        if nums[read] != 0:
+            nums[write] = nums[read]
+            write +=1
+
+    for i in range(write, len(nums)):
+        nums[i] = 0
+    return nums 
+
+
+print(MoveZeros([0,1,0,3,12]))
+
+
+def valid_palindrome(s):
+    cleaned = ''
+    for char in s: 
+        if char.isalnum():
+            cleaned += char.lower()
+        
+    left = 0 
+    right = len(cleaned) -1 
+
+    while left < right:
+        if cleaned[left] != cleaned[right]:
+            return False
+        left +=1
+        right -=1
+
+    return True
+        
+
+print(valid_palindrome("A man, a plan, a canal: Panama"))
+print(valid_palindrome("race a car"))
+           
+
+
+
+def two_sum_2(nums, target):
+
+    left = 0
+    right = len(nums) -1 
+
+
+    while left < right:
+        current_sum = nums[left] + nums[right]
+
+
+        if current_sum == target:
+            print(f"Indexes {left +1} & {right +1} equal your target of {target} ")
+            return [left + 1, right + 1]  
+
+        elif current_sum < target:
+            nums[left] += 1
+        else:
+            right -=1
+        
+    return current_sum
+
+
+
+print(two_sum_2([2,7,11,15], 9))
+
+def RemoveDuplicates(nums, val):
+    write = 1
+
+    for read in range(1, len(nums)): #Read, initialises the content within the array and reads through from the first index point (Not Zero) as it is already a single value.
+        if nums[read] != nums[read-1]:  #if the num read != the previous number(same value) then add we add it to the write array 
+            nums[write] = nums[read]    #Turns the number read into a write number where it is now stored.
+            write += 1  #Move up the index to the next number to be stored within the array
+    return write
+
+
+def RemoveStringDups(s):
+    result = []
+
+    for char in s:          
+        if result and result[-1] == char:      # if the result and the previous result = the same char
+            result.pop()                    # we will pop it and remove it from the string
+        else:
+            result.append(char)            #if it is not! then we will append the character to the list
+    fixed_string = ''.join(result)      #join the strings together to create the single string
+
+print(RemoveStringDups("abbaca"))
+
+def AllowDuplicates(nums):
+    write = 2
+
+    for read in range(2, len(nums)): #Read, initialises the content within the array and reads through from the second index point as they are already single values.
+        if nums[read] != nums[write-2] :   #if the num read != 2 written numbers (same value)
+           nums[write] = nums[read]     #Write in the number which is currently on the pointer read.
+           write += 1  #Move up the index to the next number to be stored within the array
+    return write
+print(AllowDuplicates([1,1,1,2,2,3]))
+
+
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         group = {}
@@ -9,8 +108,6 @@ class Solution:
                 group[sorted_word] = []
             group[sorted_word].append(word)
         return list(group.values())
-
-
 
 
 def majority_element(nums):
@@ -196,5 +293,6 @@ print(first_unique_char("leetcode"))  # 0
 print(first_unique_char("loveleetcode"))  # 2
 print(first_unique_char("aabb"))  # -1
 #-------------------------------------------------------------------------------------  
+
 
 
