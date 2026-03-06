@@ -1,5 +1,53 @@
  #                                                                      LEETCODE PRACTICE 
 
+
+def three_sum(nums):
+    nums.sort()
+    results = []
+
+    for i in range(len(nums)):
+        first_number = nums[i]
+
+        left = i +1
+        right = len(nums) -1
+
+        while left < right:
+            current_sum = nums[i] + nums[left] + nums[right]
+            if current_sum == 0:
+                results.append([nums[i], nums[left] , nums[right]])
+                left +=1 
+                right -=1
+            elif current_sum < 0:
+                left +=1
+            else:
+                right -=1
+
+    return results
+print(three_sum([-1, 0, 1, 2, -1, -4]))
+  
+def container_volume(heights):
+    left = 0  
+    right = len(heights) - 1
+
+    largest_area = 0
+
+    while left < right:
+
+        current_area = min(heights[left] , heights[right]) *  (right - left)
+        if current_area > largest_area:
+            largest_area = current_area 
+
+        if heights[left] < heights[right]:
+
+            left +=1 
+        else:
+
+            right -=1 
+    return largest_area 
+
+
+print(container_volume([1, 8, 6, 2, 5, 4, 8, 3, 7]))
+
 def MoveZeros(nums):
     write = 0
 
@@ -14,7 +62,6 @@ def MoveZeros(nums):
 
 
 print(MoveZeros([0,1,0,3,12]))
-
 
 def valid_palindrome(s):
     cleaned = ''
@@ -293,6 +340,7 @@ print(first_unique_char("leetcode"))  # 0
 print(first_unique_char("loveleetcode"))  # 2
 print(first_unique_char("aabb"))  # -1
 #-------------------------------------------------------------------------------------  
+
 
 
 
