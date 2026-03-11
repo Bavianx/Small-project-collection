@@ -1,5 +1,31 @@
  #                                                                      LEETCODE PRACTICE 
+def three_sum(nums): #Corrected three_sum for avoiding duplicates (True Medium leetcode question)
+    nums.sort()
+    result = []
+  
 
+    for i in range(len(nums)):
+        if i > 0 and nums[i] == nums[i-1]:
+            continue
+        first_number = nums[i]
+        left = i + 1
+        right = len(nums) -1 
+        while left < right:
+            current_sum = nums[i] + nums[left] + nums[right]
+
+            if current_sum == 0:
+                result.append([nums[i] , nums[left] , nums[right]])
+                while left < right and nums[left] == nums[left+1]:
+                    left +=1
+                while left < right and nums[right] == nums[right-1]:
+                    right -=1
+                left +=1
+                right -=1
+            elif current_sum < 0:
+                left +=1
+            else:
+                right -=1 
+    return result
 def sliding_window(arr, k):
     window_sum = sum(len(arr[:k]))
     max_sum = window_sum
@@ -11,7 +37,7 @@ def sliding_window(arr, k):
     
 print(sliding_window([2, 1, 5, 1, 3, 2], 3))
 
-def three_sum(nums):
+def three_sum(nums):   #Uncorrected three_sum DOES NOT! avoid duplicates.
     nums.sort()
     results = []
 
@@ -350,6 +376,7 @@ print(first_unique_char("leetcode"))  # 0
 print(first_unique_char("loveleetcode"))  # 2
 print(first_unique_char("aabb"))  # -1
 #-------------------------------------------------------------------------------------  
+
 
 
 
