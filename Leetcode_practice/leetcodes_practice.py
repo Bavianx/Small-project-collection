@@ -382,3 +382,4 @@ print(first_unique_char("aabb"))  # -1
 
 
 
+
