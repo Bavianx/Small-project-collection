@@ -1,4 +1,18 @@
  #                                                                      LEETCODE PRACTICE 
+
+def max_subarray(nums):
+    current_sum = nums[0] #Initialise code at index 0 within the array 
+    max_sum = nums[0] #Initialise code at index 0 within the array 
+
+    for num in nums[1:]: # Moves the number 1 each time
+        current_sum = max(num, current_sum + num) # the current sum is the max of the current num, current_sum + the current number
+        max_sum = max(max_sum, current_sum) # Max sum is the max of the highest value identified within the array while the loop was going on each time it replaced the prior value to find the max 
+    return max_sum #Returns the max_sum identified throughout the loop
+
+print(max_subarray([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
+
+
+
 def three_sum(nums): #Corrected three_sum for avoiding duplicates (True Medium leetcode question)
     nums.sort()
     result = []
