@@ -1,4 +1,10 @@
  #                                                                      LEETCODE PRACTICE 
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        count = {}
+        for num in nums:
+            count[num] = count.get(num, 0) + 1
+        return sorted(count, key=lambda x: count[x], reverse=True)[:k]
 
 def max_subarray(nums):
     current_sum = nums[0] #Initialise code at index 0 within the array 
