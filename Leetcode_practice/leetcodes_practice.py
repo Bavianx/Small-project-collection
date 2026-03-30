@@ -1,4 +1,17 @@
  #                                                                      LEETCODE PRACTICE 
+def longestsubstring(word):
+    window = set()
+    left = 0 
+    max_length = 0
+
+    for right in range(len(word)):
+        while word[right] in window:
+            window.remove(word[left])
+            left +=1 
+        window.add(word[right])
+        max_length = max(max_length, right - left +1)
+    return max_length
+
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         count = {}
