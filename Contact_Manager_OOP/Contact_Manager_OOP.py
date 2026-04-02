@@ -16,7 +16,7 @@ class ContactBook:
         for contact in self.contacts.values():   #identifies contact (singular) within the contacts dictionary   
             data.append({"name":  contact.name, "email": contact.email, "mobile": contact.mobile}) #All of the data stored under a single value within the contact
         try:
-            if os.path.exists(filename):                            # Create backup of existing file BEFORE overwriting
+            if os.path.exists(filename):           # Create backup of existing file BEFORE overwriting
                 with open(filename, 'r') as f:
                     old_data = f.read()
                 with open(filename + ".backup", 'w') as f:
@@ -37,7 +37,7 @@ class ContactBook:
     
     def remove_contact(self, name):
         if name in self.contacts:       # checks for the user input within the object contacts dictionary
-            del self.contacts[name]     #If the name is found it deletes the contacts leveraging the name
+            del self.contacts[name]     #If the name is found it deletes it from the contacts leveraging the name input 
             print(f"Successfully removed {name} from your contacts")
         else:
             print(f"{name} has not been found within your contacts!")
@@ -59,7 +59,7 @@ while True:
         print("==============================")
     
     if choice == 1:
-        name = input("Enter Contacts Name: ")
+        name = input("Enter Contacts Name: ")        #Finish with error handling across all 3 inputs 
         print("==============================")
         email = input("Please input the Contacts email: ")
         print("==============================")
@@ -67,7 +67,7 @@ while True:
         print("==============================")
         new_contact = Contact(name, email, mobile)
         contacts_list.add_contact(new_contact)
-    elif choice == 2:
+    elif choice == 2:            #Finish the rest of these off 
         pass
     elif choice == 3:
         pass
