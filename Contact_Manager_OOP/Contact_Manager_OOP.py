@@ -1,3 +1,5 @@
+#Json data persistance needs to be added and then the application is almost done
+
 import json, os
 class Contact: 
     def __init__(self, name, email, mobile):  
@@ -16,7 +18,7 @@ class ContactBook:
         for contact in self.contacts.values():   #identifies contact (singular) within the contacts dictionary   
             data.append({"name":  contact.name, "email": contact.email, "mobile": contact.mobile}) #All of the data stored under a single value within the contact
         try:
-            if os.path.exists(filename):           # Create backup of existing file BEFORE overwriting
+            if os.path.exists(filename):                            # Create backup of existing file BEFORE overwriting
                 with open(filename, 'r') as f:
                     old_data = f.read()
                 with open(filename + ".backup", 'w') as f:
@@ -35,13 +37,24 @@ class ContactBook:
     def add_contact(self, contact):
         self.contacts[contact.name] = contact    #OBJECT[individual contacts name] = contact variable
     
-    def remove_contact(self, name):
-        if name in self.contacts:       # checks for the user input within the object contacts dictionary
-            del self.contacts[name]     #If the name is found it deletes it from the contacts leveraging the name input 
-            print(f"Successfully removed {name} from your contacts")
+    def view_contact(self, name):
+        if name in self.contacts:           #searches if the individual input is within the contacts dictionary
+            contact = self.contacts[name]   #if it is then it will get the contacts name and display this as contact for call back 
+            print(f"Name: {name} | Email: {contact.email} | Mobile: {contact.mobile}")  #name is displayed from input and the contact call back is now used to leverage the object .notation
         else:
-            print(f"{name} has not been found within your contacts!")
+            print(f"{name} could not be found within your contact list.")
 
+            
+    def view_all_contacts(self):
+        if not self.contacts:   #if there are no contacts within the dictionary it will return a print message
+            print("You have no stocks within your portfolio")
+            return
+        print("Current Contacts:")
+        for name, contact in self.contacts.items():     #gets all of the data for the names within the contacts dictionary
+            print(f"Name: {name} | Email: {contact.email} | Mobile: {contact.mobile}")  #prints the data with all of the contacts as we are getting the items
+            print("="*40)
+
+    
 contacts_list = ContactBook("My Contacts")
 while True:
     print("================== Contact Manager ==================")
@@ -59,19 +72,33 @@ while True:
         print("==============================")
     
     if choice == 1:
-        name = input("Enter Contacts Name: ")        #Finish with error handling across all 3 inputs 
-        print("==============================")
+        name = input("Enter Contacts Name: ")            #Error handling needs to be added across the choices
+        print("==============================")        
         email = input("Please input the Contacts email: ")
         print("==============================")
         mobile = input("Please input the Contacts Mobile number: ")
         print("==============================")
         new_contact = Contact(name, email, mobile)
         contacts_list.add_contact(new_contact)
-    elif choice == 2:            #Finish the rest of these off 
-        pass
+    elif choice == 2:
+        name = input("Enter the contacts name: ")
+        contacts_list.view_contact(name)
     elif choice == 3:
-        pass
+        contacts_list.view_all_contacts()
     elif choice == 4:
-        pass
+        name = input("Please input the Contacts name you would like removing: ")
+        confirm = input(f"Are you sure you would like to remove {name}?: ").lower()
+        if confirm == "y": 
+            del contacts_list.contacts[name]
+            #implement JSON if save and load is added here
+            print(f"Successfully removed {name} from your contacts!")
+        else:
+            print("Operation has been cancelled!")
+            continue
     elif choice == 5:
-        pass
+        Exit = input("Are you sure you would like to leave the application?: ").lower()
+        if Exit == "y":
+            print("Thank you for using your contact book!")
+            break
+        else:
+            print("Returning back to the application!")
