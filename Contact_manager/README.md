@@ -8,6 +8,8 @@ A Python command-line worker contact management system with data persistence and
 - Remove Workers: Remove workers from the catalogue permanently
 - View All Workers: Display the full catalogue at a glance
 - Data Persistence: Save and load worker data via JSON file storage
+- Search User: Identify and locate a single worker within the contact catalogue
+- Search by role: Identifies workers within specific roles within the contact catalogue
 - Input Validation: Comprehensive error handling prevents crashes from invalid input
 - User-Friendly Interface: Menu-driven navigation with clear prompts and feedback
 - Automatic Backup System: Creates .backup files on every load and save
@@ -20,6 +22,8 @@ A Python command-line worker contact management system with data persistence and
 | `edit_user()` | Updates individual fields for existing worker	Name existence check, confirmation prompt per change |
 | `remove_user()` | Permanently removes worker from catalogue	Name existence check, confirmation prompt |
 | `view_all_users()` | Displays all workers with full contact details	None (no input) |
+| `search_user` | Identifies and displays specific workers through their name |
+| `search_by_role` | Identifies and displays workers within the role at the company |
 | `save_to_file()` | Persists data to JSON file with automatic backup | File system error handling (PermissionError, OSError) |
 | `load_from_file()` | Loads data from JSON on startup with backup creation | FileNotFoundError, JSONDecodeError, PermissionError handling |
 
