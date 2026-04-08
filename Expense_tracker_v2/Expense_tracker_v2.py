@@ -1,10 +1,24 @@
 import json, os
 import time
 from datetime import datetime
+CURRENCIES = {
+    "GBP": "£",
+    "USD": "$",
+    "EUR": "€",
+    "JPY": "¥"
+}
 
 def expense_tracker_v2():
 
     filename = "Expense_tracker.json"
+    print("Please select the your currency of choice: GBP / USD / EUR / JPY ")
+    print("Please input the currecy code from the list above")
+    currency_code = input("Currency: ").upper()
+
+    if currency_code not in CURRENCIES:
+        print("Please input a valid Code from the list above")
+        currency_code = "GBP"
+    symbol = CURRENCIES.get(currency_code, '£') 
 
     def load_from_file(filename):
         try:
@@ -59,7 +73,7 @@ def expense_tracker_v2():
             "date": date
         }
         expenses[category].append(expense)
-        print(f"Added £{amount} expense to {category}")
+        print(f"Added {symbol}{amount} expense to {category}")
         save_to_file(expenses, filename)
         print("=========================================")
             
@@ -67,14 +81,14 @@ def expense_tracker_v2():
     def View_expense_by_category(expenses, category):
         if category in expenses:
             category_expense = expenses[category][0]
-            print(f"{category}: £{category_expense}")           
+            print(f"{category}: {symbol}{category_expense}")           
         else:
             print(f"No expense found for {category}")
        
         
         print(f"\n{category.upper()} expenses:")
         for expense in expenses[category]: 
-            print(f"  £{expense['amount']} - {expense['description']} ({expense['date']})")
+            print(f"  {symbol}{expense['amount']} - {expense['description']} ({expense['date']})")
 
     def View_all_expenses(expenses):
         if not expenses:
@@ -84,7 +98,8 @@ def expense_tracker_v2():
         for category, expense_list in expenses.items(): 
             print(f"\n{category.upper()}:")
             for expense in expense_list:  
-                print(f" £{expense['amount']} - {expense['description']} ({expense['date']})")
+                print(f" {symbol}{expense['amount']} - {expense['description']} ({expense['date']})")
+
 
     def Total_spending(expenses):
         if not expenses:
@@ -97,7 +112,7 @@ def expense_tracker_v2():
             for expense in expense_list:
                 total += expense["amount"]
         
-        print(f"Total spending: £{total:.2f}")
+        print(f"Total spending: {symbol}{total:.2f}")
         return total
         
     def remove_expense(expenses, category):
@@ -108,18 +123,18 @@ def expense_tracker_v2():
         print(f"Expenses within category: {category}")
 
         for i, expense in enumerate(expenses[category]):
-            print(f"{i}. Value: £{expense['amount']} | Description: {expense['description']} | Date: {expense['date']}")
+            print(f"{i}. Value: {symbol}{expense['amount']} | Description: {expense['description']} | Date: {expense['date']}")
 
         try:
             expense_index = int(input(f"Enter the index number of the expense you want to remove (0 to {len(expenses[category]) - 1}): "))
             if 0 <= expense_index < len(expenses[category]):
                 expense_to_remove = expenses[category][expense_index]
-                print(f"You selected: £{expense_to_remove['amount']} - {expense_to_remove['description']} on {expense_to_remove['date']}")
+                print(f"You selected: {symbol}{expense_to_remove['amount']} - {expense_to_remove['description']} on {expense_to_remove['date']}")
 
                 confirm = input(f"Are you sure you would like to remove this expense from your tracker? (y/n): ")
                 if confirm.lower() == "y":
                     removed = expenses[category].pop(expense_index)
-                    print(f"Removed: £{removed['amount']} - {removed['description']} from category '{category}'.")
+                    print(f"Removed: {symbol}{removed['amount']} - {removed['description']} from category '{category}'.")
                     save_to_file(expenses, filename)
                 else:
                     print("Cancelled...")
@@ -131,6 +146,29 @@ def expense_tracker_v2():
         except IndexError:
             print("Index out of range. Please enter a valid index.")
 
+    def edit_expense(expenses, category):
+        if category not in expenses:
+            print("No expenses could be found")
+            return
+        for i, expense in enumerate(expenses[category]):
+            print(f"{i}. {symbol}{expense['amount']} - {expense['description']} - {expense['date']}")
+
+        index = int(input("Please input index for edit: "))
+
+        print("1. Amount")
+        print("2. Description") 
+        print("3. Date")
+        field = int(input("What would you like to change?: "))
+
+        if field == 1:
+            expenses[category][index]["amount"] = float(input("New amount: "))
+        elif field == 2:
+            expenses[category][index]["description"] = input("Enter new description: ")
+        elif field == 3:
+            expenses[category][index]["date"] = input("New date (YYYY-MM-DD): ")
+        
+        save_to_file(expenses, filename)
+        print("Expenses successfully updated")
 
     while True:
         print("============Welcome to your Expense Tracker============")
@@ -139,7 +177,8 @@ def expense_tracker_v2():
         print("3. View all expenses")
         print("4. Total spending")
         print("5. Remove expense")
-        print("6. Exit")
+        print("6. Edit expense")
+        print("7. Exit")
         try:
             choice = int(input("Please choose one of the menu paths: "))
             print("============================================")
@@ -157,7 +196,7 @@ def expense_tracker_v2():
             if not all(character.isalpha() or character.isspace() for character in category):
                 print("Category should only contain letters!")
                 continue 
-            amount = input("Please input the Amount spent: £")
+            amount = input(f"Please input the Amount spent: {symbol}")
             if not amount.isdigit():
                 print("Please input a valid number for the amount.")
                 continue
@@ -189,6 +228,16 @@ def expense_tracker_v2():
                 continue
             remove_expense(expenses, category)
         elif choice == 6:
+            print("---------- Categories List ----------")
+            for category in expenses:   
+                print(f"- {category}")
+            print("="*40)
+            category = input("Please enter the category you would like to edit: ").lower()
+            if not category.strip():
+                print("Category cannot be empty!")
+                continue
+            edit_expense(expenses, category)
+        elif choice == 7:
             leave = input("Are you sure you would like to Save & Exit? (y/n): ")
             if leave.lower() == "y":
                 print("Thank you for stopping by!")
@@ -200,7 +249,6 @@ def expense_tracker_v2():
                 continue
 
 expense_tracker_v2()
-
 
 
 
