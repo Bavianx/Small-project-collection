@@ -54,6 +54,13 @@ class ContactBook:
             print(f"Name: {name} | Email: {contact.email} | Mobile: {contact.mobile}")  #prints the data with all of the contacts as we are getting the items
             print("="*40)
 
+    def search_email(self, email):      #o(n)lookup (searching for email within a name loop as the email isnt the key)  # functionality is useless but learning code efficiency
+        for name, contact in self.contacts.items():
+            if contact.email == email:
+                print(f"Email: {contact.email} | Name: {name} | Mobile: {contact.mobile}")
+                return
+            print("="*40)
+        print(f"{email} could not be found within your contacts")
     
 contacts_list = ContactBook("My Contacts")
 while True:
@@ -62,10 +69,11 @@ while True:
     print("2.) View Contact")
     print("3.) View All Contacts")
     print("4.) Remove Contact")
-    print("5.) Exit")
+    print("5.) Search Email")
+    print("6.) Exit")
     print("==============================")
     try:
-        choice = int(input("Please enter from the menu (1-5): "))
+        choice = int(input("Please enter from the menu (1-6): "))
         print("==============================")
     except ValueError:
         print("Enter valid integer")
@@ -96,6 +104,10 @@ while True:
             print("Operation has been cancelled!")
             continue
     elif choice == 5:
+        email = input("Please input the email to search: ")
+        contacts_list.search_email(email)
+
+    elif choice == 6:
         Exit = input("Are you sure you would like to leave the application?: ").lower()
         if Exit == "y":
             print("Thank you for using your contact book!")
