@@ -1,11 +1,3 @@
-#Step 1 
-# The project is a contact manager, this application will store worker data provided ranging from full name, mobile number, email address and job role. this is data which is provided by the USER so input will be taken from them and stored within a nested dictionary (data under user profile). Users will need to be  added, edited and removed from this dictionary meaning there is at least 3 functions that we will be using. 
-
-#INPUT / users NAME , EMAIL , MOBILE , JOB ROLE
-#Output / upon request of user data each or all will be provided
-#FEATURES / added, edited and removed function , Nested content, main menu to flow through the sections, error handling for input data, Json for storing and keeping data alive after application closure
-
-#Create json file to store all of the data within 
 import json, os
 def contact_catalogue():
     filename = "contact_catalogue.json"
@@ -138,7 +130,6 @@ def contact_catalogue():
 
             elif change == 4:
                 break
-        
         return True
 
     def remove_user(workers, name):
@@ -169,7 +160,28 @@ def contact_catalogue():
             email = worker["email"]
             mobile = worker["mobile"]
             role = worker["role"]
-            print(f"Name:{name}, Email: {email}, Mobile: {mobile}, Role: {role}")
+            print(f"Name:{name} | Email: {email} | Mobile: {mobile} | Role: {role}")
+
+    def search_user(workers, search_name):  
+        if not workers:
+            print("No workers found")
+            return
+        if search_name in workers: 
+            worker = workers[search_name]
+            print(f"Name: {search_name} | Email: {worker['email']} | Mobile: {worker['mobile']} | Role: {worker['role']}")
+            print("="*40)
+        else:
+            print(f"{search_name} not found")
+            print("="*40)
+
+    def search_by_role(workers, role):
+        found = False
+        for name, worker in workers.items():
+           if worker["role"] == role:
+                print(f"Name: {name} | Role: {worker['role']} | Email: {worker['email']}")
+                found = True
+        if not found:
+            print(f"No workers found with role: {role}")
 
     while True:
         print("=====================Main Menu=====================")
@@ -177,7 +189,9 @@ def contact_catalogue():
         print("2. Edit a user")
         print("3. Remove a user")
         print("4. View all users")
-        print("5. Save & Exit")
+        print("5. Search workers name")
+        print("6. Search for workers within role")
+        print("7. Save & Exit")
         print("==========================================")
         try: 
             choice = int(input("Please choose one of the menu paths: "))
@@ -233,6 +247,20 @@ def contact_catalogue():
         elif choice == 4:
             view_all_users(workers)
         elif choice == 5:
+            name = input("Please input the workers name: ")
+            if not name.strip():
+                print("Name cannot be empty!")
+                print("=====================================================")
+                continue
+            if not all(character.isalpha() or character.isspace() for character in name):
+                print("Name should only contain letters!")
+                print("=====================================================")
+                continue 
+            search_user(workers, name)
+        elif choice == 6:
+            role = input("Please enter ther role youre looking for: ")
+            search_by_role(workers, role)
+        elif choice == 7:
             confirm = input("Save & Exit? (y/n): ").lower()
             if confirm.lower() == 'y':
                 save_to_file(workers, filename)
@@ -242,4 +270,3 @@ def contact_catalogue():
                 print("Continuing..")
 
 contact_catalogue()
-
