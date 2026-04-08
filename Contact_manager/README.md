@@ -25,9 +25,8 @@ A Python command-line worker contact management system with data persistence and
 
 # Future Enhancements
 
-- [ ] Search workers by name, role or email
-- [ ] Filter workers by department or job role
+- ✅ Search workers by name, role or email
+- ✅ Filter workers by department or job role
 - ✅ Comprehensive error handling (corrupted JSON, permissions)
 - ✅ Automatic backup system
 - [ ] Export catalogue to CSV
-- [ ] Sort workers alphabetically or by role
