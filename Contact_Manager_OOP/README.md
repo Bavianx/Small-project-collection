@@ -29,7 +29,7 @@ instant retrieval by name.
 - JSON persistence (coming)
 
 ## Planned Features
-- JSON save and load with backup handling
+- ✅ JSON save and load with backup handling
 - CSV export via Pandas
-- Search contacts by email or mobile
+- ✅ Search contacts by email or mobile
 - Edit existing contact details
