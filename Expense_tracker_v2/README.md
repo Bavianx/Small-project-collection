@@ -9,6 +9,8 @@ A command-line expense tracking application built in Python. Track your spending
 - **View All Expenses**: Display complete spending overview across all categories
 - **Total Spending**: Calculate total expenditure across all categories
 - **Remove Expenses**: Delete specific expenses with index-based selection
+- **Edit Previous Expenses**: Edit specific expense data through sub-menu
+- **Multi-Currency Support**: User inputted currency for native use (default will display £GBP)
 - **Data Persistence**: Automatic save/load functionality using JSON
 - **Input Validation**: Comprehensive error checking and user-friendly prompts
 - **Error Handling**: Robust file handling with backup for corrupted data
@@ -17,8 +19,7 @@ A command-line expense tracking application built in Python. Track your spending
 
 Potential improvements:
 - [ ] Monthly/weekly spending summaries
-- [ ] Category-based spending graphs
 - [ ] Search functionality by description
-- [ ] Edit existing expenses
-- [ ] Multi-currency support
-- [ ] Recurring expense tracking
+- ✅ Edit existing expenses
+- ✅ Multi-currency support
+- [ ] Adaptation into OOP
