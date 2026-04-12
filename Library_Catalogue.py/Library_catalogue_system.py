@@ -105,14 +105,17 @@ def library_catalogue_system():
         book = catalogue[ISBN]
 
         if not book["Available"]:
-            print("This book is not currently Available")
+            borrower = book.get("borrower", "Unknown")
+            print(f"This book is checked out by {borrower}")
             return False
         
         confirm = input(f"Check out book {book['Title']}? (y/n): ")
         if confirm.lower() == "y":
-
+            first = input("Borrower first name: ")
+            last = input("Borrower last name: ")
             book['Available'] = False 
-            print(f"Great! Enjoy reading {book['Title']}!")
+            book["borrower"] = f"{first} {last}"
+            print(f"Great! Enjoy reading {book['Title']} , {first}!")
             save_to_file(catalogue, filename)
             return True
         else:
@@ -134,6 +137,7 @@ def library_catalogue_system():
         if confirm.lower() == "y":
 
             book['Available'] = True 
+            book['borrower'] = None
             print(f"Thanks for returning '{book['Title']}'!")
             save_to_file(catalogue, filename)
             return True
@@ -141,7 +145,26 @@ def library_catalogue_system():
             print("Cancelled transaction..")
             return False
         
+    def remove_book(catalogue, ISBN):
+        if ISBN not in catalogue:
+            print(f"Could not find book to remove!")
+            return
+        
+        book = catalogue[ISBN]
+        print(f"Removing: {ISBN}")
+        print(f"Title: {book['Title']}")
+        print(f"Author: {book['Author']}")
+        print("=====================================")
 
+
+        confirm = input(f"Are you sure you would like to remove {book['Title']}? (y/n): ").lower()
+        if confirm == "y":
+            del catalogue[ISBN]
+            print(f"{ISBN} was successfully removed!")
+            save_to_file(catalogue, filename)
+        else:
+            print("Action was stopped!")
+            return False
 
     while True:
         print("========== Library Catalog ==========")
@@ -150,7 +173,8 @@ def library_catalogue_system():
         print("3. Search Book")
         print("4. Check Out Book")
         print("5. Return Book")
-        print("6. Save & Exit")
+        print("6. Remove Book")
+        print("7. Save & Exit")
         print("=====================================")
 
         try:
@@ -189,6 +213,12 @@ def library_catalogue_system():
             return_book(catalogue, ISBN)     
             print("=========================================")
         elif choice == 6:
+            ISBN = input("Please input the ISBN of the book to remove: ")
+            if not ISBN.strip():
+                print("ISBN cannot be empty!")
+                continue
+            remove_book(catalogue, ISBN)
+        elif choice == 7:
             leave = input("Are you sure you would like to Save & Exit? (y/n): ")
             if leave.lower() == "y":
                 print("Thank you for stopping by!")
