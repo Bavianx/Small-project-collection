@@ -15,6 +15,10 @@ A Python command-line library management system with book tracking, check-out/re
 
 - Availability Tracking: Real-time status updates (Available/Checked Out)
 
+- User check out tracking: Upon book check out users are now tied to this request (views who checked the item out)
+
+- Book removal: Removes specific books based on ISBN identifier inputted
+
 - Data Persistence: Save and load library data via JSON file storage
 
 - Input Validation: Prevents invalid operations (can't check out unavailable books)
@@ -32,16 +36,18 @@ A Python command-line library management system with book tracking, check-out/re
 | `search_book()` | Finds books by title, author, or ISBN. Returns matches or "No books found" |
 | `check_out_book()` | Marks book as unavailable (borrowed). ISBN existence check, availability check, confirmation prompt|
 | `return_book()` | Marks book as available (returned)ISBN existence check, checked-out status verification, confirmation prompt|
+| `remove_book()` | Removes book from catalogue, Displays name next to checked-out status verification, confirmation prompt|
 | `save_to_file()` | Persists data to JSON file with automatic backup | File system error handling (PermissionError, OSError) |
 | `load_from_file()` | Loads data from JSON on startup with backup creation | FileNotFoundError, JSONDecodeError, PermissionError handling |
 
 
 Future Enhancements
 
-- [ ] Track borrower information (who checked out each book)
+- ✅ Track borrower information (who checked out each book)
 - [ ] Due date tracking with overdue notifications
 - [ ] Multiple copies per title with individual tracking
 - [ ] Genre/category classification
+- ✅ Remove Book via ISBN identifier
 - ✅ Comprehensive error handling (corrupted JSON, permissions)
 - ✅ Automatic backup system
 - [ ] Export catalogue to CSV or PDF report
