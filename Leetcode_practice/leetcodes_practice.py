@@ -1,4 +1,21 @@
  #                                                                      LEETCODE PRACTICE 
+def product_array(nums):
+    left = [1] * len(nums) # Initisalises the from the second value 
+    right = [1] * len(nums) # Initisalises the from the second value 
+    result = []
+
+    for i in range(1, len(nums)): # 'i' looped to identify the values which are a result of the mathematical operations 
+        left[i] = left[i-1] * nums[i-1]
+
+    for i in range(len(nums)-2, -1, -1):  #Start- at the second to last value, Stop- at zero -1 , Step - backwareds by 1 each time
+        right[i] = right[i+1] * nums[i+1]
+    
+    for i in range(len(nums)): #Pieces both values from left and right to get the final value from the content
+        result.append(left[i] * right[i])
+    return result #returns the final operation value to the result list
+
+print(product_array([1, 2, 3, 4]))
+
 def longestsubstring(word):
     window = set()
     left = 0 
@@ -153,8 +170,6 @@ def valid_palindrome(s):
 print(valid_palindrome("A man, a plan, a canal: Panama"))
 print(valid_palindrome("race a car"))
            
-
-
 
 def two_sum_2(nums, target):
 
