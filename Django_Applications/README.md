@@ -1,7 +1,7 @@
 # Django Learning Projects
 
 A collection of Django web applications built as part of a 
-structured software engineering development programme — 
+structured software engineering development programme
 transitioning from Python scripting and OOP into full stack 
 web development.
 
@@ -14,7 +14,7 @@ REST APIs and full stack application architecture.
 ## Current Projects
 
 ### Book Catalogue
-A Django web application demonstrating core Django concepts —
+A Django web application demonstrating core Django concepts
 models, database integration via ORM, and the Django admin 
 interface. Built as a familiar first project using previously 
 learned library system logic in a new framework context.
