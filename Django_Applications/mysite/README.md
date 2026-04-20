@@ -1,7 +1,7 @@
 # Django Book Catalogue
 
 A Django web application built as an introduction to the 
-Django framework — demonstrating models, database integration 
+Django framework demonstrating models, database integration 
 and the Django admin interface.
 
 ## Features
@@ -30,6 +30,7 @@ Demonstrates transition from procedural Python and OOP to full web framework arc
 ## Planned Features
 - Book list view in browser
 - Search functionality
+- Remove Functionality (if added)
 - Checkout and return system
 - User authentication
 
