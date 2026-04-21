@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head><title>Book Catalogue</title></head>
+<body>
+    <h1>Book Catalogue</h1>
+    {% for book in books %}
+        <p>
+            <a href="/books/{{ book.pk }}/">{{ book.title }}</a> 
+            by {{ book.author }} — ISBN: {{ book.isbn }}
+        </p>
+    {% endfor %}
+</body>
+</html>

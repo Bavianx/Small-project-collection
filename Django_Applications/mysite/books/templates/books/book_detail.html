@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>{{ book.title }}</title></head>
+<body>
+    <h1>{{ book.title }}</h1>
+    <p><strong>Author:</strong> {{ book.author }}</p>
+    <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+    <p><strong>Status:</strong> 
+        {% if book.available %}
+            Available
+        {% else %}
+            Checked Out
+        {% endif %}
+    </p>
+    <a href="/books/">← Back to catalogue</a>
+</body>
+</html>
